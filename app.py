@@ -5,8 +5,8 @@ from models import *
 from datetime import datetime
 
 DB_CREDENTIAL = {
-    "user": "amadou-bely_guisse",
-    "password": "",
+    "user": "username",
+    "password": "password",
     "host": "localhost",
     "port": 5432,
     "database": "sense4data_db"

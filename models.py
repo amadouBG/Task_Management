@@ -1,6 +1,5 @@
 import psycopg2
 from psycopg2 import Error
-import pandas as pd
 
 
 def create_person_table(database_credential: dict):
@@ -422,7 +421,6 @@ def update_task(task_id: int, update_values: dict, database_credential: dict):
     return update_result
 
 
-
 # Fonction pour mettre à jour une tâche par son ID
 def update_person(person_id: int, update_values: dict, database_credential: dict):
     try:
@@ -469,50 +467,6 @@ def update_person(person_id: int, update_values: dict, database_credential: dict
             conn.close()
 
     return update_result
-
-
-# # Fonction pour mettre à jour une tâche par son ID
-# def update_person(person_id: int, update_values: dict, database_credential: dict):
-#     try:
-#         # Connexion à la base de données PostgreSQL
-#         conn = psycopg2.connect(
-#         user=database_credential.get("user"),
-#         password=database_credential.get("password"),
-#         host=database_credential.get("host"),
-#         port=database_credential.get("port"),
-#         database=database_credential.get("database")
-#         )
-#         update_result = {}
-#         cursor = conn.cursor()
-#          # Vérifiez si l'ID de la tâche existe dans la table "task"
-#         cursor.execute("SELECT id FROM person WHERE id = %s",( person_id,))
-#         existing_person = cursor.fetchone()
-#         print("###########",person_id)
-
-#         if existing_person:
-#             request_part = [f"{col_name} = '{new_value}'" for col_name, new_value in update_values.items()]
-#             request_part = ", ".join(request_part)
-#             # Mettez à jour la tâche dans la table "task"
-#             cursor.execute("UPDATE person SET %s WHERE id = %s" % (request_part, person_id))
-#             # Exécution de la requête de mise à jour
-#             conn.commit()
-#             update_result = {    
-#                 f"Person avec l'ID {person_id} mise à jour avec succès."
-#                 }
-#         else:
-#             update_result = {
-#                 f"Aucune personne trouvée avec l'ID {person_id}. Aucune mise à jour effectuée."
-#             }
-#     except (Exception, psycopg2.Error) as error:
-#         update_result = {
-#             'status':'error'
-#         }
-#     finally:
-#          # Fermeture de la connexion à la base de données
-#         if conn:
-#             cursor.close()
-#             conn.close()
-#     return update_result
 
 
 def get_all_task(database_credential:dict):
@@ -589,9 +543,6 @@ def get_all_person(database_credential:dict):
         if connection:
             cursor.close()
             connection.close()
-
-
-
 
 
 def assign_task_to_person(task_id, person_id,database_credential : dict):
